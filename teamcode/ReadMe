@@ -1,0 +1,31 @@
+Things that have been done
+
+I set up a framework for running the autonomous code, it uses the Autonomous Commands
+how it works is that you make a command class that implements the ICommand interface and has a function called
+run the returns a boolean
+read the comments in ICommand and the autoTest op mode
+
+don't put any waits in the run command
+the run command should need to be run multiple times continuously until its finished.
+so the run command should check if its met its objective and if it hasn't do somthing that gets it closer to its objective
+ex. if you were making a command to use the vision to navigate to a position on the field
+run would
+1) check where it is on the field
+    A) if it can't see where it is then it should maybe start turning to look for the pictures
+2) if we are where we are supposed to be then return true
+3) using the current position determine which direction it needs to go
+4) set the motors to drive in the correct direction
+
+
+there are a few robot components that should be useful, only the drive and vision ones should be working
+the other ones need to be coded
+
+
+Things to do
+what you need to do is make all the robot components, these components should have variables
+for all the motors and sensors they use, and methods to do the things you want the component to be able to do.
+!!!!!!!Dont have any references to gamepads in the components, you want to be able to use these components in
+the autonomous time when you don't have access to the gamepads!!!!!!!
+
+
+
