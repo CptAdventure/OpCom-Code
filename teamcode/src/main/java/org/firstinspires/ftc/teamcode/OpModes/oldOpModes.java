@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 public class oldOpModes extends OpMode {
     private Drive drive;
     private double a;
-    private float DPAD_SENSITIVITY=.5f;
+    private float BUMPER_SENSITIVITY=.5f;
 
     @Override
     public void init() {
@@ -18,8 +18,8 @@ public class oldOpModes extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.dpad_right){a+=DPAD_SENSITIVITY;}
-        if(gamepad1.dpad_left){a-=DPAD_SENSITIVITY;}
+        if(gamepad1.right_bumper){a+=BUMPER_SENSITIVITY;}
+        if(gamepad1.left_bumper){a-=BUMPER_SENSITIVITY;}
         drive.drive(gamepad1.left_stick_x,gamepad1.left_stick_y,a);
     }
 }

@@ -20,5 +20,4 @@ public class ArmMove {
 
         lift.setDirection(DcMotor.Direction.FORWARD);
     }
-
 }
