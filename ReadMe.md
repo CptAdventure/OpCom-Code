@@ -4,5 +4,5 @@
 - **Ben** - *Lancelot007*
 - **Ryan** - *fluffypotatoe*
 - **Zohan** - *Awesomee1025*
-- **Chance** - **
+- **Chance** - *CatsLover2006*
 - **Xavier** - **
