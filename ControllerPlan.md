@@ -1,27 +1,24 @@
 Code for the controls:
 
-- M = Motor
-- S = Servo
+- Hook: Servo
+  - Lower Hook: LB
+  - Raise Hook: LB
 
-- Hook: S
-- Lower Hook: LB
-- Raise Hook: LB
+- Vertical Claw Movement: Motor
+  - Lower Claw: D-Pad Up
+  - Raise Claw: D-Pad Down
 
-- Vertical Claw Movement: M
-- Lower Claw: D-Pad Up
-- Raise Claw: D-Pad Down
+- Claw Grab: Servo
+  - Open Claw: RB
+  - Close Claw: RB
 
-- Claw Grab: S
-- Open Claw: RB
-- Close Claw: RB
+- Claw Extension: Motor
+  - Extend Claw: D-Pad Left
+  - Retract Claw: D-Pad Right
 
-- Claw Extension: M
-- Extend Claw: D-Pad Left
-- Retract Claw: D-Pad Right
-
-- Intake: M
-- Start Intake: A
-- Stop Intake: A
-- Unjam Intake: B
+- Intake: Motor
+  - Start Intake: A
+  - Stop Intake: A
+  - Unjam Intake: B
 
 By Zohan (Awesomee1025)
