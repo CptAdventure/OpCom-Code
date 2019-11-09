@@ -28,6 +28,6 @@ public class oldOpModes extends OpMode {
         telemetry.addData("Claw Gripper Position", claw.open(gamepad2.right_bumper));
         telemetry.addData("Claw Lift Position", claw.lift(gamepad2.dpad_up,gamepad2.dpad_down));
         telemetry.addData("Claw Extender Position", claw.extend(gamepad2.dpad_left,gamepad2.dpad_right));
-        telemetry.addData("Intake is On?", intake.intake(gamepad2.a));
+        telemetry.addData("Intake Speed", intake.intake(gamepad2.a));
     }
 }
