@@ -10,6 +10,7 @@ public class Claw {
         vertical  = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
         extend = hardwareMap.get(Servo.class, "clawExtender");
+        vertical.setTargetPosition(0);
         vertical.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public double open(boolean open) {
@@ -22,19 +23,19 @@ public class Claw {
     }
     public double lift(boolean up, boolean down) {
         if(up){
-            vertical.setTargetPosition(vertical.getTargetPosition()+10);
+            vertical.setTargetPosition(vertical.getTargetPosition()+1);
         }
         if(down){
-            vertical.setTargetPosition(vertical.getTargetPosition()-10);
+            vertical.setTargetPosition(vertical.getTargetPosition()-1);
         }
         return vertical.getCurrentPosition();
     }
     public double extend(boolean extend, boolean retract) {
         if(extend){
-            this.extend.setPosition(this.extend.getPosition()+0.1);
+            this.extend.setPosition(this.extend.getPosition()+0.01);
         }
             if(retract){
-            this.extend.setPosition(this.extend.getPosition()-0.1);
+            this.extend.setPosition(this.extend.getPosition()-0.01);
         }
         return this.extend.getPosition();
     }

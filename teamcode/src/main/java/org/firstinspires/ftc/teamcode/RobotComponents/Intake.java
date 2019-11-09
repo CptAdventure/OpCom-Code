@@ -16,6 +16,9 @@ public class Intake {
         if (run) {
             leftMotor.setPower(1.0);
             rightMotor.setPower(-1.0);
+        } else {
+            leftMotor.setPower(0.0);
+            rightMotor.setPower(0.0);
         }
         return (leftMotor.getPower()+(rightMotor.getPower()*-1))/2;
     }
