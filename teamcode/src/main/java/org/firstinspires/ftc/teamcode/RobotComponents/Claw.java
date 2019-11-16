@@ -1,17 +1,23 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 public class Claw {
     private DcMotor vertical;
     private Servo open;
-    private Servo extend;
+    private Servo rotate;
+    private CRServo extend;
     private boolean oldOpen;
     private int on = 0;
+    private double position = 0;
     public Claw (HardwareMap hardwareMap) {
         vertical  = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
-        extend = hardwareMap.get(Servo.class, "clawExtender");
+        rotate = hardwareMap.get(Servo.class, "clawRotate");
+        extend = hardwareMap.get(CRServo.class, "clawExtender");
+        vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rotate.scaleRange(-1, 1);
     }
     public double open(boolean open) {
         if (open&&!oldOpen) {
@@ -25,20 +31,26 @@ public class Claw {
     public double lift(boolean up, boolean down) {
         vertical.setPower(0);
         if(up){
-            vertical.setPower(0.1);
+            vertical.setPower(1);
         }
         if(down){
-            vertical.setPower(-0.1);
+            vertical.setPower(vertical.getPower()-1);
         }
-        return vertical.getCurrentPosition();
+        position += vertical.getPower();
+        return position;
     }
     public double extend(boolean extend, boolean retract) {
+        this.extend.setPower(0);
         if(extend){
-            this.extend.setPosition(this.extend.getPosition()+0.01);
+            this.extend.setPower(0.5);
         }
-            if(retract){
-            this.extend.setPosition(this.extend.getPosition()-0.01);
+        if(retract){
+            this.extend.setPower(this.extend.getPower()-.5);
         }
-        return this.extend.getPosition();
+        return this.extend.getPower();
+    }
+    public double rotate(double position) {
+        rotate.setPosition(position);
+        return this.rotate.getPosition();
     }
 }
