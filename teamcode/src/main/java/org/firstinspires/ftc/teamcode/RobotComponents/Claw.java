@@ -6,27 +6,29 @@ public class Claw {
     private DcMotor vertical;
     private Servo open;
     private Servo extend;
+    private boolean oldOpen;
+    private int on = 0;
     public Claw (HardwareMap hardwareMap) {
         vertical  = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
         extend = hardwareMap.get(Servo.class, "clawExtender");
-        vertical.setTargetPosition(0);
-        vertical.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public double open(boolean open) {
-        if (open) {
-            this.open.setPosition(1);
-        } else {
-            this.open.setPosition(0);
+        if (open&&!oldOpen) {
+            on++;
         }
+        on %= 2;
+        this.open.setPosition(on);
+        oldOpen = open;
         return this.open.getPosition();
     }
     public double lift(boolean up, boolean down) {
+        vertical.setPower(0);
         if(up){
-            vertical.setTargetPosition(vertical.getTargetPosition()+1);
+            vertical.setPower(0.1);
         }
         if(down){
-            vertical.setTargetPosition(vertical.getTargetPosition()-1);
+            vertical.setPower(-0.1);
         }
         return vertical.getCurrentPosition();
     }
