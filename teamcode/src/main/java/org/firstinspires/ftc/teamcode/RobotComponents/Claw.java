@@ -18,6 +18,7 @@ public class Claw {
         extend = hardwareMap.get(CRServo.class, "clawExtender");
         vertical.setTargetPosition(0);
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        vertical.setDirection(DcMotor.Direction.REVERSE);
         vertical.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extend.setDirection(CRServo.Direction.REVERSE);
     }
@@ -54,7 +55,7 @@ public class Claw {
         return this.extend.getPower();
     }
     public double rotate(double position) {
-        rotate.setPosition((position+1)/2);
+        rotate.setPosition(Math.abs(position));
         return this.rotate.getPosition();
     }
 }

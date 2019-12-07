@@ -12,14 +12,9 @@ public class Intake {
         leftMotor.setDirection(DcMotor.Direction.FORWARD);
         rightMotor.setDirection(DcMotor.Direction.FORWARD);
     }
-    public double intake (boolean run) {
-        if (run) {
-            leftMotor.setPower(1.0);
-            rightMotor.setPower(-1.0);
-        } else {
-            leftMotor.setPower(0.0);
-            rightMotor.setPower(0.0);
-        }
+    public double intake (int speed) {
+        leftMotor.setPower(1.0 * speed);
+        rightMotor.setPower(-1.0 * speed);
         return (leftMotor.getPower()+(rightMotor.getPower()*-1))/2;
     }
 }

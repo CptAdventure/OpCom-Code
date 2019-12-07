@@ -12,7 +12,6 @@ public class driveOpMode extends OpMode {
     private Drive drive;
     //private Claw claw;
     private double roation;
-    private float BUMPER_SENSITIVITY=.5f;
     //private Intake intake;
     private double driveX;
     private double driveY;
@@ -25,9 +24,9 @@ public class driveOpMode extends OpMode {
     @Override
     public void loop() {
         telemetry.update();
-        if(gamepad1.left_stick_y==0){roation=0;}else {roation=gamepad1.left_stick_y;}
+        if(gamepad1.right_stick_x==0){roation=0;}else {roation=gamepad1.right_stick_x;}
         if(gamepad1.left_stick_x==0){driveX=0;} else {driveX=gamepad1.left_stick_x;}
-        if(gamepad1.right_stick_y==0){driveY=0;} else {driveY=gamepad1.right_stick_y;}
+        if(gamepad1.left_stick_y==0){driveY=0;} else {driveY=gamepad1.left_stick_y;}
         drive.drive(driveX,driveY,roation);
         telemetry.addData("Movement (x,y,r)",driveX+","+driveY+","+ roation);
         /*telemetry.addData("Claw Gripper Position", claw.open(gamepad2.right_bumper));
