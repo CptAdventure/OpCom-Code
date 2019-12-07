@@ -10,7 +10,7 @@ public class Claw {
     private Servo rotate;
     private CRServo extend;
     private boolean oldOpen;
-    private int on = 0;
+    private float on = 0;
     public Claw (HardwareMap hardwareMap) {
         vertical  = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
@@ -24,10 +24,10 @@ public class Claw {
     }
     public double open(boolean open) {
         if (open&&!oldOpen) {
-            on++;
+            on+=.5;
         }
-        on %= 2;
-        this.open.setPosition(on);
+        on %= 1;
+        this.open.setPosition(on+.25);
         oldOpen = open;
         return this.open.getPosition();
     }
@@ -44,6 +44,10 @@ public class Claw {
         }
         return vertical.getCurrentPosition();
     }
+    public void resetlift() {
+        vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
     public double extend(boolean extend, boolean retract) {
         this.extend.setPower(0);
         if(extend){
@@ -55,7 +59,7 @@ public class Claw {
         return this.extend.getPower();
     }
     public double rotate(double position) {
-        rotate.setPosition(Math.abs(position));
+        rotate.setPosition(Math.abs(1-position)%2-.1);
         return this.rotate.getPosition();
     }
 }
