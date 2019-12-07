@@ -24,10 +24,10 @@ public class Claw {
     }
     public double open(boolean open) {
         if (open&&!oldOpen) {
-            on+=.5;
+            on+=.3;
         }
-        on %= 1;
-        this.open.setPosition(on+.25);
+        on%=.6;
+        this.open.setPosition(on+.2);
         oldOpen = open;
         return this.open.getPosition();
     }
@@ -59,7 +59,7 @@ public class Claw {
         return this.extend.getPower();
     }
     public double rotate(double position) {
-        rotate.setPosition(Math.abs(1-position)%2-.1);
+        rotate.setPosition(Math.abs(position)%2-.1);
         return this.rotate.getPosition();
     }
 }
