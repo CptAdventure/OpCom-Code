@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
 
+import android.support.annotation.NonNull;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
     private DcMotor leftMotor;
     private DcMotor rightMotor;
-    public Intake(HardwareMap hardwareMap){
+    public Intake(@NonNull HardwareMap hardwareMap){
         leftMotor = hardwareMap.get(DcMotor.class, "leftIntake");
         rightMotor = hardwareMap.get(DcMotor.class, "rightIntake");
         leftMotor.setDirection(DcMotor.Direction.FORWARD);

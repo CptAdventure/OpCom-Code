@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
+import android.support.annotation.NonNull;
+
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,7 +12,7 @@ public class Claw {
     private CRServo extend;
     private boolean oldOpen;
     private int on = 0;
-    public Claw (HardwareMap hardwareMap) {
+    public Claw (@NonNull HardwareMap hardwareMap) {
         vertical  = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
         rotate = hardwareMap.get(Servo.class, "clawRotate");

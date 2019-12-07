@@ -23,7 +23,6 @@ public class oldOpModes extends OpMode {
     @Override
     public void loop() {
         telemetry.update();
-        roation=0;
         if(gamepad1.left_stick_y==0){roation=0;}else {roation=gamepad1.left_stick_y;}
         if(gamepad1.left_stick_x==0){driveX=0;} else {driveX=gamepad1.left_stick_x;}
         if(gamepad1.right_stick_y==0){driveY=0;} else {driveY=gamepad1.right_stick_y;}
