@@ -22,7 +22,7 @@ public class TimedMoveCommand implements ICommand {
 
     @Override
     public boolean Run() {
-    if(stopwatch.getElapsedTime()==NOT_STARTED){
+        if(stopwatch.getElapsedTime()==NOT_STARTED){
             stopwatch.start();
         }
         if (stopwatch.getElapsedTime()>=time) {

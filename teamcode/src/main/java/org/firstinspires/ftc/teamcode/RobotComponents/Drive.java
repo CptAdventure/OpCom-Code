@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
-import android.support.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -8,7 +7,7 @@ public class Drive {
     private DcMotor forwardRightMotor = null;
     private DcMotor rearLeftMotor = null;
     private DcMotor rearRightMotor = null;
-    public Drive(@NonNull HardwareMap hardwareMap){
+    public Drive(HardwareMap hardwareMap){
         forwardLeftMotor  = hardwareMap.get(DcMotor.class, "forwardLeftMotor");
         forwardRightMotor = hardwareMap.get(DcMotor.class, "forwardRightMotor");
         rearLeftMotor = hardwareMap.get(DcMotor.class, "rearLeftMotor");
