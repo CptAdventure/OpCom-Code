@@ -18,25 +18,17 @@ public class Drive {
         rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
     }
     public void drive(double x, double y, double r){
-        double forwardLeftPower     = y - x - r;
-        double forwardRightPower    = -y - x - r;
-        double rearLeftPower        = y + x - r;
-        double rearRightPower       = -y + x - r;
+        double forwardLeftPower  =  y - x - r;
+        double forwardRightPower = -y - x - r;
+        double rearLeftPower     =  y + x - r;
+        double rearRightPower    = -y + x - r;
         forwardLeftMotor.setPower(forwardLeftPower);
         forwardRightMotor.setPower(forwardRightPower);
         rearLeftMotor.setPower(rearLeftPower);
         rearRightMotor.setPower(rearRightPower);
     }
-    public void testFrontLeft(){
-        forwardLeftMotor.setPower(0.5);
-    }
-    public void testFrontRight(){
-        forwardRightMotor.setPower(0.5);
-    }
-    public void testRearLeft(){
-        rearLeftMotor.setPower(0.5);
-    }
-    public void testRearRight(){
-        rearRightMotor.setPower(0.5);
-    }
+    public void testFrontLeft() { forwardLeftMotor.setPower(0.5); }
+    public void testFrontRight() { forwardRightMotor.setPower(0.5); }
+    public void testRearLeft() { rearLeftMotor.setPower(0.5); }
+    public void testRearRight() { rearRightMotor.setPower(0.5); }
 }
