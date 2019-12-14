@@ -66,7 +66,7 @@ public class Claw {
         return this.extend.getPower();
     }
     public double rotate(double position) {
-        rotate.setPosition(1-Math.abs(position-0.1));
+        rotate.setPosition(1-Math.abs(position*1.1-0.1));
         return this.rotate.getPosition();
     }
 }
