@@ -25,7 +25,7 @@ public class far extends OpMode {
         claw = new Claw(hardwareMap);
 
         // Commands
-        listOfCommands.add(new GoDownToBottom(claw));
+        //listOfCommands.add(new GoDownToBottom(claw));
         listOfCommands.add(new TimedMoveCommand(0,1,0,700, drive));
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(0,-1,0,350, drive));

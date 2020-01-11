@@ -12,7 +12,7 @@ public class GoDownToBottom implements ICommand {
 
     @Override
     public boolean Run() {
-        claw.lift(false,true);
+        claw.lift(-0.25);
         return claw.down();
     }
 }

@@ -80,20 +80,20 @@ public class Claw {
     }
     public double extend (boolean extend, boolean retract) {
         this.extend.setPower(0);
-        if (extend && !cfSwitch.getState()){
+        if (/*extend && cfSwitch.getState()*/false){
             this.extend.setPower(0.5);
         }
-        if (retract && !ccSwitch.getState()){
+        if (retract && ccSwitch.getState()){
             this.extend.setPower(this.extend.getPower()-.5);
         }
         return this.extend.getPower();
     }
     public double extend (double extend) {
         this.extend.setPower(extend);
-        if (this.extend.getPower()>0 && !cfSwitch.getState()){
+        /*if (this.extend.getPower()>0 && cfSwitch.getState()false){
             this.extend.setPower(0);
-        }
-        if (this.extend.getPower()<0 && !ccSwitch.getState()){
+        }*/
+        if (this.extend.getPower()<0 && ccSwitch.getState()){
             this.extend.setPower(0);
         }
         return this.extend.getPower();

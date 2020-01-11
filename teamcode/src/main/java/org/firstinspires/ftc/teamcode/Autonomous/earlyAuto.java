@@ -25,7 +25,7 @@ public class earlyAuto extends OpMode {
         claw = new Claw(hardwareMap);
 
         // Commands
-        listOfCommands.add(new GoDownToBottom(claw));
+        //listOfCommands.add(new GoDownToBottom(claw));
         listOfCommands.add(new TimedMoveCommand(0,1,0,100, drive));
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(0,-1,0,50, drive));
