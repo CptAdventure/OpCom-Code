@@ -1,20 +1,25 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
     private DcMotor leftMotor;
     private DcMotor rightMotor;
+    private DcMotor inMotor;
     public Intake(HardwareMap hardwareMap){
         leftMotor = hardwareMap.get(DcMotor.class, "leftIntake");
         rightMotor = hardwareMap.get(DcMotor.class, "rightIntake");
-        leftMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightMotor.setDirection(DcMotor.Direction.FORWARD);
+        inMotor = hardwareMap.get(DcMotor.class, "innerIntake");
+        leftMotor.setDirection(DcMotor.Direction.REVERSE);
+        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        inMotor.setDirection(DcMotor.Direction.REVERSE);
     }
     public double intake (int speed) {
         leftMotor.setPower(1.0 * speed);
         rightMotor.setPower(-1.0 * speed);
-        return (leftMotor.getPower()+(rightMotor.getPower()*-1))/2;
+        inMotor.setPower(0.75 * speed);
+        return (leftMotor.getPower()+(rightMotor.getPower()*-1)+inMotor.getPower())/3;
     }
 }

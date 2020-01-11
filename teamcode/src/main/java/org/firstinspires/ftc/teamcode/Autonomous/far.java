@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Close Autonomous", group="LinearOpMode")
-public class earlyAuto extends OpMode {
+@Autonomous(name="Far Autonomous", group="LinearOpMode")
+public class far extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
     private Drive drive;
@@ -26,9 +26,9 @@ public class earlyAuto extends OpMode {
 
         // Commands
         listOfCommands.add(new GoDownToBottom(claw));
-        listOfCommands.add(new TimedMoveCommand(0,1,0,100, drive));
+        listOfCommands.add(new TimedMoveCommand(0,1,0,700, drive));
         listOfCommands.add(new TimedWaitCommand(100));
-        listOfCommands.add(new TimedMoveCommand(0,-1,0,50, drive));
+        listOfCommands.add(new TimedMoveCommand(0,-1,0,350, drive));
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(1,0,0,1000, drive));
         listOfCommands.add(new EndCommand());

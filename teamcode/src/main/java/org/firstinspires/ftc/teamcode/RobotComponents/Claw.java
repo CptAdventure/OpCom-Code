@@ -13,9 +13,12 @@ public class Claw {
     private CRServo extend;
     private boolean oldOpen;
     private boolean oldRotate;
-    private float on = 0;
-    private float p = 0.9f;
+    private boolean oldUp;
+    private float on = .5f;
+    private boolean p = false;
     private DigitalChannel liftSwitch;
+    private DigitalChannel ccSwitch;
+    private DigitalChannel cfSwitch;
     private int MAX_HEIGHT_VALUE = 7500;
     public Claw (HardwareMap hardwareMap) {
         vertical = hardwareMap.get(DcMotor.class, "verticalClaw");
@@ -23,12 +26,16 @@ public class Claw {
         rotate = hardwareMap.get(Servo.class, "clawRotate");
         extend = hardwareMap.get(CRServo.class, "clawExtender");
         liftSwitch = hardwareMap.get(DigitalChannel.class, "bottomLift");
+        ccSwitch = hardwareMap.get(DigitalChannel.class, "closeExtension");
+        cfSwitch = hardwareMap.get(DigitalChannel.class, "farExtension");
         vertical.setTargetPosition(0);
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         vertical.setDirection(DcMotor.Direction.REVERSE);
         vertical.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extend.setDirection(CRServo.Direction.REVERSE);
         liftSwitch.setMode(DigitalChannel.Mode.INPUT);
+        ccSwitch.setMode(DigitalChannel.Mode.INPUT);
+        cfSwitch.setMode(DigitalChannel.Mode.INPUT);
     }
     public double open (boolean open) {
         if (open&&!oldOpen) {
@@ -41,17 +48,30 @@ public class Claw {
     }
     public double lift (boolean up, boolean down) {
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        vertical.setPower(0);
-        if (up && vertical.getCurrentPosition()<MAX_HEIGHT_VALUE) {
+        if ((up||oldUp) && vertical.getCurrentPosition()<MAX_HEIGHT_VALUE) {
             vertical.setPower(1);
             if (down) {
                 vertical.setPower(0);
             }
         } else if (liftSwitch.getState()) {
             vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            oldUp = up;
             return 0;
         } else if (down) {
-            vertical.setPower(-0.5);
+            vertical.setPower(-0.625);
+        } else {
+            vertical.setPower(0);
+        }
+        oldUp = up;
+        return vertical.getCurrentPosition();
+    }
+    public double lift (double up) {
+        vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        vertical.setPower(up>-0.625?up:-0.625);
+        if (up==0) vertical.setPower(0);
+        if (liftSwitch.getState()&&up<0) {
+            vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            return 0;
         }
         return vertical.getCurrentPosition();
     }
@@ -60,20 +80,32 @@ public class Claw {
     }
     public double extend (boolean extend, boolean retract) {
         this.extend.setPower(0);
-        if (extend){
+        if (extend && !cfSwitch.getState()){
             this.extend.setPower(0.5);
         }
-        if (retract){
+        if (retract && !ccSwitch.getState()){
             this.extend.setPower(this.extend.getPower()-.5);
         }
         return this.extend.getPower();
     }
+    public double extend (double extend) {
+        this.extend.setPower(extend);
+        if (this.extend.getPower()>0 && !cfSwitch.getState()){
+            this.extend.setPower(0);
+        }
+        if (this.extend.getPower()<0 && !ccSwitch.getState()){
+            this.extend.setPower(0);
+        }
+        return this.extend.getPower();
+    }
+    public int extended() {
+        return (cfSwitch.getState()?1:0)+(ccSwitch.getState()?2:0);
+    }
     public double rotate(boolean open) {
         if (open&&!oldRotate) {
-            p+=0.9;
+            p=!p;
         }
-        p%=1.8;
-        this.rotate.setPosition(p);
+        this.rotate.setPosition(p?1:0);
         oldRotate = open;
         return this.rotate.getPosition();
     }

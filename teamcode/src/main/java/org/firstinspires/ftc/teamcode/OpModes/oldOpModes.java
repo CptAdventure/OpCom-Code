@@ -28,9 +28,10 @@ public class oldOpModes extends OpMode {
         drive.drive(driveX,driveY,roation);
         telemetry.addData("Movement (x,y,r)",driveX+","+driveY+","+ roation);
         telemetry.addData("Claw Gripper Position", claw.open(gamepad2.right_bumper));
-        telemetry.addData("Claw Lift Position (Down?)", Double.toString(claw.lift(gamepad2.dpad_up,gamepad2.dpad_down))
+        telemetry.addData("Claw Lift Position (Down?)", Double.toString(claw.lift(gamepad2.right_stick_y))
                 +'('+claw.down()+')');
-        telemetry.addData("Claw Extender Position", claw.extend(gamepad2.dpad_left,gamepad2.dpad_right));
+        telemetry.addData("Claw Extender Position (End?)", claw.extend(gamepad2.left_stick_y) + "(" +
+                (claw.extended()%2!=claw.extended()?(claw.extended()==3?"Error":"Close"):(claw.extended()==1?" Far ":"None "))+")");
         telemetry.addData("Claw Rotation (Degrees)", claw.rotate(gamepad2.left_bumper));
         telemetry.addData("Intake Speed", intake.intake((gamepad1.right_bumper?1:0)*(gamepad1.b?-1:1)));
     }
