@@ -65,11 +65,11 @@ public class Claw {
         oldUp = up;
         return vertical.getCurrentPosition();
     }
-    public double lift (double up) {
+    public double lift (double liftPower) {
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        vertical.setPower(up>-0.625?up:-0.625);
-        if (up==0) vertical.setPower(0);
-        if (liftSwitch.getState()&&up<0) {
+        vertical.setPower(liftPower>-0.625?liftPower:-0.625);
+        if (liftPower==0) vertical.setPower(0);
+        if (liftSwitch.getState()&&liftPower<0) {
             vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             return 0;
         }
@@ -88,10 +88,10 @@ public class Claw {
         }
         return this.extend.getPower();
     }
-    public double extend (double extend) {
-        this.extend.setPower(extend);
-        /*if (this.extend.getPower()>0 && cfSwitch.getState()false){
-            this.extend.setPower(0);
+    public double extend (double extendPower) {
+        this.extend.setPower(extendPower);
+        /*if (this.extendPower.getPower()>0 && cfSwitch.getState()false){
+            this.extendPower.setPower(0);
         }*/
         if (this.extend.getPower()<0 && ccSwitch.getState()){
             this.extend.setPower(0);
