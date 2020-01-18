@@ -34,5 +34,6 @@ public class oldOpModes extends OpMode {
                 (claw.extended()%2!=claw.extended()?(claw.extended()==3?"Error":"Close"):(claw.extended()==1?" Far ":"None "))+")");
         telemetry.addData("Claw Rotation (Degrees)", claw.rotate(gamepad2.left_bumper));
         telemetry.addData("Intake Speed", intake.intake((gamepad1.right_bumper?1:0)*(gamepad1.b?-1:1)));
+        telemetry.addData("Capstone Deployed", claw.capStone(gamepad2.x));
     }
 }

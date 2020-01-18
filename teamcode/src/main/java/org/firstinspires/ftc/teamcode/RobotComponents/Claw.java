@@ -9,17 +9,21 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 public class Claw {
     private DcMotor vertical;
     private Servo open;
+    private Servo stone;
     private Servo rotate;
     private CRServo extend;
     private boolean oldOpen;
     private boolean oldRotate;
     private boolean oldUp;
     private float on = .5f;
+    private boolean prevDeployed = false;
     private boolean p = false;
     private DigitalChannel liftSwitch;
     private DigitalChannel ccSwitch;
     private DigitalChannel cfSwitch;
-    private int MAX_HEIGHT_VALUE = 7500;
+
+    private final int MAX_HEIGHT_VALUE = 7500;
+
     public Claw (HardwareMap hardwareMap) {
         vertical = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
@@ -67,7 +71,7 @@ public class Claw {
     }
     public double lift (double liftPower) {
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        vertical.setPower(liftPower>-0.625?liftPower:-0.625);
+        vertical.setPower(Math.max(liftPower, -0.625));
         if (liftPower==0) vertical.setPower(0);
         if (liftSwitch.getState()&&liftPower<0) {
             vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -108,5 +112,10 @@ public class Claw {
         this.rotate.setPosition(p?1:0);
         oldRotate = open;
         return this.rotate.getPosition();
+    }
+    public boolean capStone(boolean open) {
+        stone.setPosition(open?0:1);
+        prevDeployed = open || prevDeployed;
+        return prevDeployed;
     }
 }

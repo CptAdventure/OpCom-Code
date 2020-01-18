@@ -23,6 +23,7 @@ public class testGo extends OpMode {
     private Drive drive;
     private Claw claw;
     private int i;
+
     @Override
     public void init() {
         drive = new Drive(hardwareMap);
@@ -37,10 +38,10 @@ public class testGo extends OpMode {
         listOfCommands.add(new TimedMoveCommand(-0.25, 0, 0, 100, drive));
         listOfCommands.add(new GrabBrickFirst(claw));
         listOfCommands.add(new BrickGrab(claw, false));
-        for (i=0; i==3; i++) {
+        for (i=-1; ++i==3;) {
             listOfCommands.add(new TimedMoveCommand(1, 0, 0, 1000, drive));
             listOfCommands.add(new BrickGrab(claw, true));
-            listOfCommands.add(new TimedMoveCommand(1, 0, 0, 1100, drive));
+            listOfCommands.add(new TimedMoveCommand(-1, 0, 0, 1100, drive));
             listOfCommands.add(new BrickGrab(claw, false));
         }
         listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 500, drive));
