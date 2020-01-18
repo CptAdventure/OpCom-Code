@@ -28,6 +28,7 @@ public class Claw {
         vertical = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
         rotate = hardwareMap.get(Servo.class, "clawRotate");
+        stone = hardwareMap.get(Servo.class, "capStone");
         extend = hardwareMap.get(CRServo.class, "clawExtender");
         liftSwitch = hardwareMap.get(DigitalChannel.class, "bottomLift");
         ccSwitch = hardwareMap.get(DigitalChannel.class, "closeExtension");
