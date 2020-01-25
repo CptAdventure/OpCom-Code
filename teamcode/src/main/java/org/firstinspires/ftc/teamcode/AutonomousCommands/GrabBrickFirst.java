@@ -10,7 +10,7 @@ public class GrabBrickFirst implements ICommand {
     private boolean i;
 
     private final int ABOVE_BRICK = 1000;
-    private final int PAST_BRICK = 1000;
+    private final int PAST_BRICK = 2500;
 
     public GrabBrickFirst(Claw claw) {
         this.claw = claw;
