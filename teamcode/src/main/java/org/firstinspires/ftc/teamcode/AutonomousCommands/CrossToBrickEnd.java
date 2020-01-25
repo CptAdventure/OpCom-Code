@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
+import static java.lang.Double.isNaN;
+
 public class CrossToBrickEnd implements ICommand {
     private Drive drive;
     private DistanceSensor color;
@@ -20,11 +22,11 @@ public class CrossToBrickEnd implements ICommand {
 
     @Override
     public boolean Run() {
-        if(color.getDistance(DistanceUnit.INCH)<ACTIVATED) {
+        if(color.getDistance(DistanceUnit.INCH)>=ACTIVATED||isNaN(color.getDistance(DistanceUnit.INCH))) {
             drive.drive(0,0,0);
             return true;
         }
-        drive.drive((direction?1:-1)*0.25,0,0);
+        drive.drive((direction?1:-1),0,0);
         return false;
     }
 }

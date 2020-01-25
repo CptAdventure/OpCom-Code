@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Far Autonomous Park on Line", group="LinearOpMode")
+@Autonomous(name="AB Far", group="LinearOpMode")
 public class far extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
@@ -26,9 +26,9 @@ public class far extends OpMode {
 
         // Commands
         //listOfCommands.add(new GoDownToBottom(claw));
-        listOfCommands.add(new TimedMoveCommand(0,1,0,700, drive));
+        listOfCommands.add(new TimedMoveCommand(0,1,0,900, drive));
         listOfCommands.add(new TimedWaitCommand(100));
-        listOfCommands.add(new TimedMoveCommand(0,-1,0,350, drive));
+        listOfCommands.add(new TimedMoveCommand(0,-1,0,450, drive));
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(1,0,0,1000, drive));
         listOfCommands.add(new EndCommand());

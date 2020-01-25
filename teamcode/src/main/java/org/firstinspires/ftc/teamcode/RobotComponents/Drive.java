@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Drive {
     private DcMotor forwardLeftMotor = null;
@@ -12,8 +13,8 @@ public class Drive {
         forwardRightMotor = hardwareMap.get(DcMotor.class, "forwardRightMotor");
         rearLeftMotor = hardwareMap.get(DcMotor.class, "rearLeftMotor");
         rearRightMotor = hardwareMap.get(DcMotor.class, "rearRightMotor");
-        forwardLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        forwardRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        forwardLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        forwardRightMotor.setDirection(DcMotor.Direction.FORWARD);
         rearLeftMotor.setDirection(DcMotor.Direction.FORWARD);
         rearRightMotor.setDirection(DcMotor.Direction.FORWARD);
     }

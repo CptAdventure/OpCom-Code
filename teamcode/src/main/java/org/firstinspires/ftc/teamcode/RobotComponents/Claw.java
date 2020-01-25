@@ -85,7 +85,7 @@ public class Claw {
     }
     public double extend (boolean extend, boolean retract) {
         this.extend.setPower(0);
-        if (/*extend && cfSwitch.getState()*/false){
+        if (extend /*&& cfSwitch.getState()*/){
             this.extend.setPower(0.5);
         }
         if (retract && ccSwitch.getState()){
@@ -98,7 +98,7 @@ public class Claw {
         /*if (this.extendPower.getPower()>0 && cfSwitch.getState()false){
             this.extendPower.setPower(0);
         }*/
-        if (this.extend.getPower()<0 && ccSwitch.getState()){
+        if ((this.extend.getPower() < 0) && ccSwitch.getState()){
             this.extend.setPower(0);
         }
         return this.extend.getPower();
@@ -115,7 +115,7 @@ public class Claw {
         return this.rotate.getPosition();
     }
     public boolean capStone(boolean open) {
-        stone.setPosition(open?0:1);
+        stone.setPosition(prevDeployed?0.25:0);
         prevDeployed = open || prevDeployed;
         return prevDeployed;
     }

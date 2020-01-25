@@ -84,3 +84,4 @@ lint/tmp/
 # Build Files
 *.java___jb_tmp___
 *.xml___jb_tmp___
+*.java~

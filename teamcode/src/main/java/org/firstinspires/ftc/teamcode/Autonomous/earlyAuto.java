@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Close Autonomous", group="LinearOpMode")
+@Autonomous(name="AB Near", group="LinearOpMode")
 public class earlyAuto extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
