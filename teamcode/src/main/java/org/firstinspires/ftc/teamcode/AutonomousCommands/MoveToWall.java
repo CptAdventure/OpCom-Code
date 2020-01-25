@@ -27,7 +27,7 @@ public class MoveToWall implements ICommand {
             drive.drive(0,0,0);
             return true;
         }
-        drive.drive(0,(direction?1:-1),0);
+        drive.drive(0,(direction?0.5:-0.5),0);
         return false;
     }
 }

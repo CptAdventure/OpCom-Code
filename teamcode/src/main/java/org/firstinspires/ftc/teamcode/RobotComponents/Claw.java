@@ -85,7 +85,7 @@ public class Claw {
     }
     public double extend (boolean extend, boolean retract) {
         this.extend.setPower(0);
-        if (extend /*&& cfSwitch.getState()*/){
+        if (extend && cfSwitch.getState()){
             this.extend.setPower(0.5);
         }
         if (retract && ccSwitch.getState()){
@@ -93,11 +93,21 @@ public class Claw {
         }
         return this.extend.getPower();
     }
+    public double extend (boolean extend, boolean retract, boolean override) {
+        this.extend.setPower(0);
+        if (extend){
+            this.extend.setPower(0.5);
+        }
+        if (retract){
+            this.extend.setPower(this.extend.getPower()-.5);
+        }
+        return this.extend.getPower();
+    }
     public double extend (double extendPower) {
-        this.extend.setPower(extendPower);
-        /*if (this.extendPower.getPower()>0 && cfSwitch.getState()false){
-            this.extendPower.setPower(0);
-        }*/
+        extend.setPower(extendPower);
+        if (extend.getPower()>0 && cfSwitch.getState()){
+            extend.setPower(0);
+        }
         if ((this.extend.getPower() < 0) && ccSwitch.getState()){
             this.extend.setPower(0);
         }

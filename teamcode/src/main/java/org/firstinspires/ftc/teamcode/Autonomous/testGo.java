@@ -32,21 +32,18 @@ public class testGo extends OpMode {
         // Commands
         // listOfCommands.add(new GoDownToBottom(claw));
         listOfCommands.add(new MoveToWall(drive, hardwareMap, true, 100));
-        listOfCommands.add(new TimedMoveCommand(0, -0.05, 0, 1, drive));
         listOfCommands.add(new TimedWaitCommand(100));
-        listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, true));
-        listOfCommands.add(new TimedMoveCommand(-0.05, 0, 0, 1, drive));
+        listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, false));
         listOfCommands.add(new TimedWaitCommand(100));
-        listOfCommands.add(new TimedMoveCommand(-0.25, 0, 0, 100, drive));
-        listOfCommands.add(new TimedMoveCommand(0.05, 0, 0, 1, drive));
+        listOfCommands.add(new TimedMoveCommand(0.625, 0, 0, 250, drive));
         listOfCommands.add(new GrabBrickFirst(claw));
         listOfCommands.add(new BrickGrab(claw, false));
         for (i=-1; ++i!=3;) {
-            listOfCommands.add(new TimedMoveCommand(1, 0, 0, 1000, drive));
-            listOfCommands.add(new TimedMoveCommand(-0.05, 0, 0, 1, drive));
+            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 2000, drive));
+            listOfCommands.add(new TimedMoveCommand(0, -0.25, 0, 1000, drive));
             listOfCommands.add(new BrickGrab(claw, true));
-            listOfCommands.add(new TimedMoveCommand(-1, 0, 0, 1100, drive));
-            listOfCommands.add(new TimedMoveCommand(0.05, 0, 0, 1, drive));
+            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 2200, drive));
+            listOfCommands.add(new TimedMoveCommand(0, 0.25, 0, 1000, drive));
             listOfCommands.add(new BrickGrab(claw, false));
         }
         listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 500, drive));

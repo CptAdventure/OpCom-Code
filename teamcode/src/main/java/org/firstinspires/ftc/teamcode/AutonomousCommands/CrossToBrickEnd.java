@@ -26,7 +26,7 @@ public class CrossToBrickEnd implements ICommand {
             drive.drive(0,0,0);
             return true;
         }
-        drive.drive((direction?1:-1),0,0);
+        drive.drive((direction?0.5:-0.5),0,0);
         return false;
     }
 }
