@@ -8,9 +8,9 @@ public class GrabBrickFirst implements ICommand {
     private boolean upDone;
     private Stopwatch timer;
     private Stopwatch timer2;
-    private boolean i;
+    private boolean start = false;
 
-    private final int ABOVE_BRICK = 1500;
+    private final int ABOVE_BRICK = 2000;
     private final int PAST_BRICK = 2500;
 
     public GrabBrickFirst(Claw claw) {
@@ -21,32 +21,34 @@ public class GrabBrickFirst implements ICommand {
 
     @Override
     public boolean Run() {
-        if (upDone) {
-            if (timer.getElapsedTime() >= PAST_BRICK) {
-                timer.stop();
-                claw.extend(0);
-                i=claw.down();
-                claw.lift(false, !i);
-                if (i) {
-                    if(timer2.getElapsedTime() >= 1000) {
-                        claw.extend(false, true, true);
-                    } else {
-                        claw.extend(0);
-                        return false;
-                    }
-                    if (timer2.getElapsedTime()==0) {
-                        timer2.start();
-                    }
-                }
-            } else {
-                claw.extend(true, false, true);
-                claw.lift(0);
-            }
-            if (timer.getElapsedTime()==0) {
-                timer.start();
-            }
+        if (!start) {
+            claw.lift(-1);
+            start = claw.down();
         } else {
-            upDone = claw.lift(true, false) > ABOVE_BRICK;
+            if (upDone) {
+                if (timer.getElapsedTime() >= PAST_BRICK) {
+                    timer.stop();
+                    claw.extend(0);
+                    if (claw.down()) {
+                        claw.lift(0);
+                        if (timer2.getElapsedTime() >= 1000) {
+                            claw.extend(false, true, true);
+                        } else {
+                            claw.extend(0);
+                            return true;
+                        }
+                        if (timer2.getElapsedTime() < 1) timer2.start();
+                    } else {
+                        claw.lift(false, true);
+                    }
+                } else {
+                    claw.extend(true, false, true);
+                    claw.lift(0);
+                }
+                if (timer.getElapsedTime() == 0) timer.start();
+            } else {
+                upDone = claw.lift(true, false) >= ABOVE_BRICK;
+            }
         }
         return false;
     }

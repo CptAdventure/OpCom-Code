@@ -12,7 +12,7 @@ public class CrossToBrickEnd implements ICommand {
     private Drive drive;
     private DistanceSensor color;
     private boolean direction;
-    private final int ACTIVATED = 12;
+    private final int ACTIVATED = 100;
 
     public CrossToBrickEnd(Drive drive, HardwareMap hardwareMap, boolean direction){
         this.drive = drive;

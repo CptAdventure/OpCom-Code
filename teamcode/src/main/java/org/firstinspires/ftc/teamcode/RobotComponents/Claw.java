@@ -74,6 +74,7 @@ public class Claw {
         vertical.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         vertical.setPower(Math.max(liftPower, -0.625));
         if (liftPower==0) vertical.setPower(0);
+        if (vertical.getCurrentPosition()>MAX_HEIGHT_VALUE) vertical.setPower(Math.min(liftPower, 0));
         if (liftSwitch.getState()&&liftPower<0) {
             vertical.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             return 0;
@@ -99,7 +100,7 @@ public class Claw {
             this.extend.setPower(0.5);
         }
         if (retract){
-            this.extend.setPower(this.extend.getPower()-.5);
+            this.extend.setPower(-.5);
         }
         return this.extend.getPower();
     }

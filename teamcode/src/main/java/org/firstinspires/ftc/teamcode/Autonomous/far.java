@@ -30,7 +30,7 @@ public class far extends OpMode {
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(0,-1,0,450, drive));
         listOfCommands.add(new TimedWaitCommand(100));
-        listOfCommands.add(new TimedMoveCommand(1,0,0,1000, drive));
+        listOfCommands.add(new TimedMoveCommand(1,0,0,400, drive));
         listOfCommands.add(new EndCommand());
         commandToRun = listOfCommands.remove(0);
     }
