@@ -36,13 +36,14 @@ public class testGo extends OpMode {
         listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, false));
         listOfCommands.add(new TimedWaitCommand(100));
         listOfCommands.add(new TimedMoveCommand(0.625, 0, 0, 250, drive));
-        listOfCommands.add(new GrabBrickFirst(claw));
+        listOfCommands.add(new GrabBrickFirst(claw, telemetry));
         for (i=-1; ++i!=3;) {
             listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 2000, drive));
-            listOfCommands.add(new TimedMoveCommand(0, -0.25, 0, 2500, drive));
+            listOfCommands.add(new TimedMoveCommand(0, -0.25, 0, 1500, drive));
             listOfCommands.add(new BrickGrab(claw, true));
-            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 2200, drive));
-            listOfCommands.add(new TimedMoveCommand(0, 0.25, 0, 2500, drive));
+            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 2000, drive));
+            listOfCommands.add(new TimedMoveCommand(0, 0.25, 0, 1500, drive));
+            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 200, drive));
             listOfCommands.add(new BrickGrab(claw, false));
         }
         listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 500, drive));

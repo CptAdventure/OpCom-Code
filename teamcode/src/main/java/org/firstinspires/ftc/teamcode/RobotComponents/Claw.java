@@ -97,13 +97,15 @@ public class Claw {
         if (retract && !ccSwitch.getState()) {
             this.extend.setPower(this.extend.getPower() - .5); // If retractable and retraction wanted, reduce power to retract/neutralize
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0; // Crude position from here to return
+        clawPosition += ((nanoTime() - oldTime) != 0) ? ((this.extend.getPower() * 100000000) / (nanoTime() - oldTime)): 0; // Crude position from here to return
         oldTime = nanoTime();
         if(cfSwitch.getState()) {
-            clawPosition = 17.5;
+            clawPosition = 15;
+            return 15;
         }
         if (ccSwitch.getState()) {
             clawPosition = 0;
+            return 0;
         }
         return clawPosition; // Return estimated position
     }
@@ -115,15 +117,17 @@ public class Claw {
         if (retract){
             this.extend.setPower(-.5);
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0;
+        clawPosition += ((nanoTime() - oldTime) != 0) ? ((this.extend.getPower() * 100000000) / (nanoTime() - oldTime)) : 0; // Crude position from here to return
         oldTime = nanoTime();
         if(cfSwitch.getState()) {
-            clawPosition = 17.5;
+            clawPosition = 15;
+            return 15;
         }
         if (ccSwitch.getState()) {
             clawPosition = 0;
+            return 0;
         }
-        return clawPosition;
+        return clawPosition; // Return estimated position
     }
     public double extend (double extendPower) { // Number input (Joystick)
         extend.setPower(extendPower); // Set power
@@ -133,15 +137,21 @@ public class Claw {
         if ((extend.getPower() < 0) && !ccSwitch.getState()){
             extend.setPower(0); // Don't go too close
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0; // Crude position from here on down
+        clawPosition += ((nanoTime() - oldTime) != 0) ? ((this.extend.getPower() * 100000000) / (nanoTime() - oldTime)) : 0; // Crude position from here to return
         oldTime = nanoTime();
-        if (cfSwitch.getState()) {
-            clawPosition = 17.5;
+        if(cfSwitch.getState()) {
+            clawPosition = 15;
+            return 15;
         }
         if (ccSwitch.getState()) {
             clawPosition = 0;
+            return 0;
         }
         return clawPosition; // Return estimated position
+    }
+    public double extendVal() {
+        clawPosition += ((nanoTime() - oldTime) != 0) ? ((this.extend.getPower() * 100000000) / (nanoTime() - oldTime)) : 0;
+        return clawPosition;
     }
     public int extended() { // Get extension system: 0 = none, 1 = far, 2 = close, 3 = both (error)
         return (cfSwitch.getState()?1:0)+(ccSwitch.getState()?2:0);
