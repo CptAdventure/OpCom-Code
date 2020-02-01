@@ -97,7 +97,7 @@ public class Claw {
         if (retract && !ccSwitch.getState()) {
             this.extend.setPower(this.extend.getPower() - .5); // If retractable and retraction wanted, reduce power to retract/neutralize
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000 : 0; // Crude position from here to return
+        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0; // Crude position from here to return
         oldTime = nanoTime();
         if(cfSwitch.getState()) {
             clawPosition = 17.5;
@@ -115,7 +115,7 @@ public class Claw {
         if (retract){
             this.extend.setPower(-.5);
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000 : 0;
+        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0;
         oldTime = nanoTime();
         if(cfSwitch.getState()) {
             clawPosition = 17.5;
@@ -133,9 +133,9 @@ public class Claw {
         if ((extend.getPower() < 0) && !ccSwitch.getState()){
             extend.setPower(0); // Don't go too close
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000 : 0; // Crude position from here on down
+        clawPosition += ((nanoTime() - oldTime) != 0) ? this.extend.getPower() / (nanoTime() - oldTime) * 100000000 : 0; // Crude position from here on down
         oldTime = nanoTime();
-        if(cfSwitch.getState()) {
+        if (cfSwitch.getState()) {
             clawPosition = 17.5;
         }
         if (ccSwitch.getState()) {
