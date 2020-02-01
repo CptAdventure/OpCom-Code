@@ -6,18 +6,14 @@ import org.firstinspires.ftc.teamcode.Utilities.Stopwatch;
 public class GrabBrickFirst implements ICommand {
     private Claw claw;
     private boolean upDone;
-    private Stopwatch timer;
-    private Stopwatch timer2;
     private boolean start = false;
     private boolean retracted = false;
+    private boolean extended = false;
 
-    private final int ABOVE_BRICK = 2000;
-    private final int PAST_BRICK = 2500;
+    private final int ABOVE_BRICK = 1750;
 
     public GrabBrickFirst(Claw claw) {
         this.claw = claw;
-        timer = new Stopwatch();
-        timer2 = new Stopwatch();
     }
 
     @Override
@@ -27,13 +23,11 @@ public class GrabBrickFirst implements ICommand {
             start = claw.down();
         } else {
             if (upDone) {
-                if (timer.getElapsedTime() >= PAST_BRICK) {
-                    timer.stop();
+                if (extended) {
                     claw.extend(0);
                     if (claw.down()) {
-                        if (timer2.getElapsedTime() < 1) timer2.start();
                         claw.lift(0);
-                        retracted = claw.extend(false, true, true) < 3;
+                        retracted = claw.extend(false, true, true) < 0;
                         if (retracted){
                             claw.extend(0);
                             return true;
@@ -43,15 +37,14 @@ public class GrabBrickFirst implements ICommand {
                         claw.lift(false, true);
                     }
                 } else {
+                    claw.lift(0);
                     if (!retracted) {
                         claw.extend(false, true, true);
                     } else {
-                        claw.extend(true, false, true);
-                        claw.lift(0);
+                        extended = claw.extend(true, false, true) > 10;
                     }
-                    retracted = 2 <= claw.extended();
+                    retracted = 2 <= claw.extended() || retracted;
                 }
-                if (timer.getElapsedTime() == 0) timer.start();
             } else {
                 upDone = claw.lift(true, false) >= ABOVE_BRICK;
             }
