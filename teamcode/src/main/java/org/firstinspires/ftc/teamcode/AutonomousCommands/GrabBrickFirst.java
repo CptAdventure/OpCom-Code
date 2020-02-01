@@ -9,6 +9,7 @@ public class GrabBrickFirst implements ICommand {
     private Stopwatch timer;
     private Stopwatch timer2;
     private boolean start = false;
+    private boolean retracted = false;
 
     private final int ABOVE_BRICK = 2000;
     private final int PAST_BRICK = 2500;
@@ -30,20 +31,25 @@ public class GrabBrickFirst implements ICommand {
                     timer.stop();
                     claw.extend(0);
                     if (claw.down()) {
+                        if (timer2.getElapsedTime() < 1) timer2.start();
                         claw.lift(0);
-                        if (timer2.getElapsedTime() >= 1000) {
-                            claw.extend(false, true, true);
-                        } else {
+                        retracted = claw.extend(false, true, true) < 3;
+                        if (retracted){
                             claw.extend(0);
                             return true;
                         }
-                        if (timer2.getElapsedTime() < 1) timer2.start();
+                        return false;
                     } else {
                         claw.lift(false, true);
                     }
                 } else {
-                    claw.extend(true, false, true);
-                    claw.lift(0);
+                    if (!retracted) {
+                        claw.extend(false, true, true);
+                    } else {
+                        claw.extend(true, false, true);
+                        claw.lift(0);
+                    }
+                    retracted = 2 <= claw.extended();
                 }
                 if (timer.getElapsedTime() == 0) timer.start();
             } else {

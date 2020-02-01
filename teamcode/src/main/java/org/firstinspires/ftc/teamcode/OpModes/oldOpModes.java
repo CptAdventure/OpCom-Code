@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Intake;
 public class oldOpModes extends OpMode {
     private Drive drive;
     private Claw claw;
-    private double roation;
+    private double rotation;
     private Intake intake;
     private double driveX;
     private double driveY;
@@ -29,18 +29,18 @@ public class oldOpModes extends OpMode {
     @Override
     public void loop() {
         telemetry.update();
-        roation=gamepad1.right_stick_x==0?0:gamepad1.right_stick_x;
+        rotation =gamepad1.right_stick_x==0?0:gamepad1.right_stick_x;
         driveX=gamepad1.left_stick_x==0?0:gamepad1.left_stick_x;
         driveY=gamepad1.left_stick_y==0?0:gamepad1.left_stick_y;
-        drive.drive(driveX,driveY,roation);
-        telemetry.addData("Movement (x,y,r)",driveX+","+driveY+","+ roation);
+        drive.drive(driveX,driveY, rotation);
+        telemetry.addData("Movement (x,y,r)",driveX+","+driveY+","+ rotation);
         telemetry.addData("Claw Gripper Position", claw.open(gamepad2.right_bumper));
-        telemetry.addData("Claw Lift Position (Down?)", Double.toString(claw.lift(-gamepad2.right_stick_y*.9))
+        telemetry.addData("Claw Lift Position (Down?)", Double.toString(claw.lift(gamepad2.right_stick_y*-.9))
                 +'('+claw.down()+')');
-        telemetry.addData("Claw Extender Position (End?)", claw.extend(gamepad2.left_stick_x*.9) + "(" +
+        telemetry.addData("Claw Extender Position (End?)", claw.extend(gamepad2.dpad_up, gamepad2.dpad_down) + "(" +
                 (claw.extended()%2!=claw.extended()?(claw.extended()==3?"Error":"Close"):(claw.extended()==1?" Far ":"None "))+")");
         telemetry.addData("Claw Rotation (Degrees)", claw.rotate(gamepad2.left_bumper));
-        telemetry.addData("Intake Speed", intake.intake((gamepad1.right_bumper?1:0)*(gamepad1.b?-1:1)));
+        telemetry.addData("Intake Speed", intake.intake((gamepad1.a ^ gamepad1.right_bumper ?1:0)*(gamepad1.b?-1:1)));
         telemetry.addData("Capstone Deployed", claw.capStone(gamepad2.x));
         colorInput.setState(gamepad2.y && !colorChange);
         colorChange =  gamepad2.y;
