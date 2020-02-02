@@ -30,10 +30,7 @@ public class GrabBrickFirst implements ICommand {
                 if (extended) {
                     if (claw.down()) {
                         claw.lift(0);
-                        if (pulse) {
-                            claw.extend(false, true);
-                            pulse = false;
-                        }
+                        claw.extend(false, true);
                         retracted = claw.extendVal() < 5;
                         if (retracted){
                             claw.extend(0);
@@ -41,11 +38,8 @@ public class GrabBrickFirst implements ICommand {
                         }
                         return false;
                     } else {
-                        if(!pulse) {
-                            claw.extend(0);
-                            claw.lift(false, true);
-                            pulse = true;
-                        }
+                        claw.extend(0);
+                        claw.lift(false, true);
                     }
                 } else {
                     claw.lift(0);
@@ -53,20 +47,16 @@ public class GrabBrickFirst implements ICommand {
                         retracted = 2 <= claw.extended();
                         claw.extend(false, true);
                     } else {
-                        if (pulse) {
-                            claw.extend(true, false);
-                            pulse = false;
-                        }
-                        extended = claw.extendVal() > 15;
+                        claw.extend(true, false);
+                        extended = claw.extendVal() > 12.5;
                     }
                 }
             } else {
-                if(!pulse) {
-                    upDone = claw.lift(true, false) >= ABOVE_BRICK;
-                    pulse = true;
-                }
+                upDone = claw.lift(true, false) >= ABOVE_BRICK;
             }
         }
+        t.addData("DEBUG1", claw.extendVal());
+        t.addData("DEBUG2", claw.extended());
         return false;
     }
 }
