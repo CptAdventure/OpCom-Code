@@ -23,11 +23,11 @@ public class MoveToWall implements ICommand {
 
     @Override
     public boolean Run() {
-        if(Math.round(color.getDistance(DistanceUnit.INCH))<ACTIVATED&&!isNaN(color.getDistance(DistanceUnit.INCH))) {
-            drive.drive(0,0,0);
-            return true;
+        if(Math.round(color.getDistance(DistanceUnit.INCH))<ACTIVATED&&!isNaN(color.getDistance(DistanceUnit.INCH))) { // When within distance
+            drive.drive(0,0,0); // Stop moving
+            return true; // Exit (Next)
         }
-        drive.drive(0,(direction?0.5:-0.5),0);
-        return false;
+        drive.drive(0,(direction?0.5:-0.5),0); // Move
+        return false; // Exit (Keep going in loop)
     }
 }

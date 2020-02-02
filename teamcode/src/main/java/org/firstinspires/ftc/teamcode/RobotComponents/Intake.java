@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.RobotComponents;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
@@ -19,7 +18,7 @@ public class Intake {
     public double intake (int speed) {
         leftMotor.setPower(1.0 * speed);
         rightMotor.setPower(-1.0 * speed);
-        inMotor.setPower(0.75 * speed);
-        return (leftMotor.getPower()+(rightMotor.getPower()*-1)+inMotor.getPower())/3;
+        inMotor.setPower(0.75 * speed); // Slower
+        return (leftMotor.getPower()+(rightMotor.getPower()/-1)+(inMotor.getPower()/0.75))/3;
     }
 }

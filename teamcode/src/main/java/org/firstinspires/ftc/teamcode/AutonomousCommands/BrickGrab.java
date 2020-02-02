@@ -7,19 +7,14 @@ public class BrickGrab implements ICommand {
     private Claw claw;
     private boolean direction;
 
-    public BrickGrab (Claw claw, boolean direction) {
+    public BrickGrab (Claw claw, boolean direction) { // Direction: Extend when true, Retract when false
         this.claw = claw;
         this.direction = direction;
     }
 
     @Override
     public boolean Run() {
-        if (direction) {
-            claw.extend(true, false);
-        }
-        if (!direction) {
-            claw.extend(false, true);
-        }
+        claw.extend(direction, !direction);
         if (wait.Run()) {
             claw.extend(0);
             return true;

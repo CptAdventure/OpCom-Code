@@ -22,41 +22,41 @@ public class GrabBrickFirst implements ICommand {
 
     @Override
     public boolean Run() {
-        if (!start) {
+        if (!start) { // This makes sure the lift is down
             claw.lift(-1);
             start = claw.down();
         } else {
             if (upDone) {
                 if (extended) {
                     if (claw.down()) {
-                        claw.lift(0);
+                        claw.lift(0); // Stop lowering
                         claw.extend(false, true);
-                        retracted = claw.extendVal() < 5;
+                        retracted = claw.extendVal() < 5; // This integer is approx. brick width
                         if (retracted){
-                            claw.extend(0);
-                            return true;
+                            claw.extend(0); // Stop retracting
+                            return true; // Return (next)
                         }
-                        return false;
+                        return false; // Return (continue)
                     } else {
-                        claw.extend(0);
-                        claw.lift(false, true);
+                        claw.extend(0); // Stop extending
+                        claw.lift(false, true); // Lower
                     }
                 } else {
-                    claw.lift(0);
+                    claw.lift(0); // Stop lifting
                     if (!retracted) {
-                        retracted = 2 <= claw.extended();
-                        claw.extend(false, true);
+                        retracted = 2 <= claw.extended(); // When the inner sensor is on
+                        claw.extend(false, true); // Retract (to the innermost value)
                     } else {
-                        claw.extend(true, false);
-                        extended = claw.extendVal() > 12.5;
+                        claw.extend(true, false); // Extend to the
+                        extended = claw.extendVal() > 12.5; // value of 12.5
                     }
                 }
             } else {
-                upDone = claw.lift(true, false) >= ABOVE_BRICK;
+                upDone = claw.lift(true, false) >= ABOVE_BRICK; // When above the brick, set upDone
             }
         }
-        t.addData("DEBUG1", claw.extendVal());
+        t.addData("DEBUG1", claw.extendVal()); // Debug Values
         t.addData("DEBUG2", claw.extended());
-        return false;
+        return false; // Return (continue)
     }
 }

@@ -22,11 +22,11 @@ public class CrossToBrickEnd implements ICommand {
 
     @Override
     public boolean Run() {
-        if(color.getDistance(DistanceUnit.INCH)>=ACTIVATED||isNaN(color.getDistance(DistanceUnit.INCH))) {
-            drive.drive(0,0,0);
-            return true;
+        if(color.getDistance(DistanceUnit.INCH)>=ACTIVATED||isNaN(color.getDistance(DistanceUnit.INCH))) { // When a distance away
+            drive.drive(0,0,0); // Stop moving
+            return true; // Exit (next)
         }
-        drive.drive((direction?0.5:-0.5),0,0);
-        return false;
+        drive.drive((direction?0.5:-0.5),0,0); // Move
+        return false; // Exit (continue)
     }
 }
