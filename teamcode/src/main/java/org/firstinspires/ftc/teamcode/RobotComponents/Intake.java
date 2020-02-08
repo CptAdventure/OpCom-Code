@@ -18,7 +18,7 @@ public class Intake {
     public double intake (int speed) {
         leftMotor.setPower(1.0 * speed);
         rightMotor.setPower(-1.0 * speed);
-        inMotor.setPower(0.75 * speed); // Slower
-        return (leftMotor.getPower()+(rightMotor.getPower()/-1)+(inMotor.getPower()/0.75))/3;
+        inMotor.setPower(0.9 * speed); // Slower
+        return (leftMotor.getPower()+(rightMotor.getPower()/-1)+(inMotor.getPower()/0.9))/3;
     }
 }

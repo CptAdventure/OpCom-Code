@@ -97,7 +97,9 @@ public class Claw {
         if (retract && !ccSwitch.getState()) {
             this.extend.setPower(this.extend.getPower() - .5); // If retractable and retraction wanted, reduce power to retract/neutralize
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? (((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000) : 0; // Crude position from here to return
+        if ((nanoTime() - oldTime) == 0) { // Crude position from here to return
+            clawPosition += ((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000;
+        }
         oldTime = nanoTime();
         if (ccSwitch.getState()) {
             clawPosition = 0;
@@ -113,7 +115,9 @@ public class Claw {
         if (retract){
             this.extend.setPower(-.5);
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? (((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000) : 0; // Crude position from here to return
+        if ((nanoTime() - oldTime) == 0) { // Crude position from here to return
+            clawPosition += ((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000;
+        }
         oldTime = nanoTime();
         if (ccSwitch.getState()) {
             clawPosition = 0;
@@ -129,7 +133,9 @@ public class Claw {
         if ((extend.getPower() < 0) && !ccSwitch.getState()){
             extend.setPower(0); // Don't go too close
         }
-        clawPosition += ((nanoTime() - oldTime) != 0) ? (((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000) : 0; // Crude position from here to return
+        if ((nanoTime() - oldTime) == 0) { // Crude position from here to return
+            clawPosition += ((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000;
+        }
         oldTime = nanoTime();
         if (ccSwitch.getState()) {
             clawPosition = 0;
@@ -137,8 +143,10 @@ public class Claw {
         }
         return clawPosition; // Return estimated position
     }
-    public double extendVal() {
-        clawPosition += ((nanoTime() - oldTime) != 0) ? (((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000) : 0; // Crude position from here to return
+    public double extendVal() { // Crude position gathering
+        if ((nanoTime() - oldTime) == 0) {
+            clawPosition += ((nanoTime() - oldTime) * (this.extend.getPower())) / 100000000;
+        }
         oldTime = nanoTime();
         if (ccSwitch.getState()) {
             clawPosition = 0;

@@ -17,7 +17,7 @@ public class ButtonEject {
         if (going) {
             if (!half) {
                 claw.extend(true, false);
-                if (claw.extendVal() >= 12.5) {
+                if (claw.extendVal() >= 7.5) {
                     claw.rotate(true);
                 } else {
                     claw.rotate(false);
@@ -29,7 +29,7 @@ public class ButtonEject {
                 }
             } else {
                 claw.extend(false, true);
-                if (claw.extendVal() <= 12.5) {
+                if (claw.extendVal() <= 7.5) {
                     claw.rotate(true);
                 } else {
                     claw.rotate(false);
