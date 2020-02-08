@@ -16,8 +16,8 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Blue B Brick", group="OpMode")
-public class testGo extends OpMode {
+@Autonomous(name="Red B Brick", group="OpMode")
+public class redBBr extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
     private Drive drive;
@@ -33,23 +33,23 @@ public class testGo extends OpMode {
         // listOfCommands.add(new GoDownToBottom(claw));
         listOfCommands.add(new MoveToWall(drive, hardwareMap, true, 500));
         listOfCommands.add(new TimedWaitCommand(250));
-        listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, false));
+        listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, true));
         listOfCommands.add(new TimedWaitCommand(250));
-        listOfCommands.add(new TimedMoveCommand(0.625, 0, 0, 400, drive));
+        listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, 400, drive));
         listOfCommands.add(new GrabBrickFirst(claw, telemetry));
         for (i=-1; ++i!=3;) {
             listOfCommands.add(new TimedMoveCommand(0, -0.5, 0, 500, drive));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 4000, drive));
-            listOfCommands.add(new BrickGrab(claw, true));
             listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 4000, drive));
+            listOfCommands.add(new BrickGrab(claw, true));
+            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 4000, drive));
             listOfCommands.add(new TimedWaitCommand(250));
             listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, 500, drive));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(0.625, 0, 0, 600, drive));
+            listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, 600, drive));
             listOfCommands.add(new BrickGrab(claw, false));
         }
-        listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 500, drive));
+        listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 500, drive));
         listOfCommands.add(new EndCommand());
         commandToRun = listOfCommands.remove(0);
     }
