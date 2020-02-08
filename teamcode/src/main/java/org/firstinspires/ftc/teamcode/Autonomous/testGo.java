@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Autonomous.brickMoveData;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Blue B Brick", group="OpMode")
+@Autonomous(name="Red B Brick", group="OpMode")
 public class testGo extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;

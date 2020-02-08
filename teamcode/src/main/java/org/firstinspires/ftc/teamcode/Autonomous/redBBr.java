@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Red B Brick", group="OpMode")
+@Autonomous(name="Blue B Brick", group="OpMode")
 public class redBBr extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
