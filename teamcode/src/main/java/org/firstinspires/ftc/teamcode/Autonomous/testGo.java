@@ -40,10 +40,10 @@ public class testGo extends OpMode {
         for (i=-1; ++i!=3;) {
             listOfCommands.add(new TimedMoveCommand(0, -0.5, 0, 500, drive));
             listOfCommands.add(new TimedWaitCommand(500));
-            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 2000, drive));
+            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 4000, drive));
             listOfCommands.add(new BrickGrab(claw, true));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 2000, drive));
+            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 4000, drive));
             listOfCommands.add(new TimedWaitCommand(500));
             listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, 500, drive));
             listOfCommands.add(new TimedWaitCommand(500));
