@@ -13,6 +13,7 @@ public class MoveToWall implements ICommand {
     private DistanceSensor color;
     private boolean direction;
     private int ACTIVATED = 100;
+    private ICommand wait = new TimedWaitCommand(250);
 
     public MoveToWall(Drive drive, HardwareMap hardwareMap, boolean direction, int dist){
         this.drive = drive;
@@ -23,7 +24,8 @@ public class MoveToWall implements ICommand {
 
     @Override
     public boolean Run() {
-        if(Math.round(color.getDistance(DistanceUnit.INCH))<ACTIVATED&&!isNaN(color.getDistance(DistanceUnit.INCH))) { // When within distance
+        boolean exitAllowed = wait.Run();
+        if(Math.round(color.getDistance(DistanceUnit.INCH))<ACTIVATED&&!isNaN(color.getDistance(DistanceUnit.INCH))& exitAllowed) { // When within distance
             drive.drive(0,0,0); // Stop moving
             return true; // Exit (Next)
         }

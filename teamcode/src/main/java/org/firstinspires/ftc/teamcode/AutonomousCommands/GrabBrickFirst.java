@@ -31,7 +31,7 @@ public class GrabBrickFirst implements ICommand {
                     if (claw.down()) {
                         claw.lift(0); // Stop lowering
                         claw.extend(false, true);
-                        retracted = claw.extendVal() < 5; // This integer is approx. brick width
+                        retracted = claw.extendVal() < 2.5; // This integer is approx. brick width
                         if (retracted){
                             claw.extend(0); // Stop retracting
                             return true; // Return (next)
@@ -48,7 +48,7 @@ public class GrabBrickFirst implements ICommand {
                         claw.extend(false, true); // Retract (to the innermost value)
                     } else {
                         claw.extend(true, false); // Extend to the
-                        extended = claw.extendVal() > 12.5; // value of 12.5
+                        extended = (claw.extendVal() > 12.5) || ((claw.extended() % 2) == 1); // value of 12.5
                     }
                 }
             } else {

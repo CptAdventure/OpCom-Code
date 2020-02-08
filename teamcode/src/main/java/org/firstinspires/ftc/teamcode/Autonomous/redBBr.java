@@ -23,6 +23,7 @@ public class redBBr extends OpMode {
     private Drive drive;
     private Claw claw;
     private int i;
+    private brickMoveData movementData;
 
     @Override
     public void init() {
@@ -35,21 +36,21 @@ public class redBBr extends OpMode {
         listOfCommands.add(new TimedWaitCommand(250));
         listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, true));
         listOfCommands.add(new TimedWaitCommand(250));
-        listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, 400, drive));
+        listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, movementData.MOVE_HALF, drive));
         listOfCommands.add(new GrabBrickFirst(claw, telemetry));
         for (i=-1; ++i!=3;) {
-            listOfCommands.add(new TimedMoveCommand(0, -0.5, 0, 500, drive));
+            listOfCommands.add(new TimedMoveCommand(0, -0.5, 0, movementData.MOVE_DOWN, drive));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 4000, drive));
+            listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, movementData.MOVE_ACROSS, drive));
             listOfCommands.add(new BrickGrab(claw, true));
-            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, 4000, drive));
+            listOfCommands.add(new TimedMoveCommand(-0.5, 0, 0, movementData.MOVE_ACROSS, drive));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, 500, drive));
+            listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, movementData.MOVE_DOWN, drive));
             listOfCommands.add(new TimedWaitCommand(250));
-            listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, 600, drive));
+            listOfCommands.add(new TimedMoveCommand(-0.625, 0, 0, movementData.MOVE_HALF, drive));
             listOfCommands.add(new BrickGrab(claw, false));
         }
-        listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, 500, drive));
+        listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, movementData.MOVE_LINE, drive));
         listOfCommands.add(new EndCommand());
         commandToRun = listOfCommands.remove(0);
     }
