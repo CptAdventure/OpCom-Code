@@ -25,11 +25,15 @@ public class MoveToWall implements ICommand {
     @Override
     public boolean Run() {
         boolean exitAllowed = wait.Run();
+        if (!exitAllowed) { // Accelerate
+            drive.drive(0,(direction?0.25:-0.25),0);
+        } else {
+            drive.drive(0,(direction?0.5:-0.5),0);
+        }
         if(Math.round(color.getDistance(DistanceUnit.INCH))<ACTIVATED&&!isNaN(color.getDistance(DistanceUnit.INCH))& exitAllowed) { // When within distance
             drive.drive(0,0,0); // Stop moving
             return true; // Exit (Next)
         }
-        drive.drive(0,(direction?0.5:-0.5),0); // Move
         return false; // Exit (Keep going in loop)
     }
 }

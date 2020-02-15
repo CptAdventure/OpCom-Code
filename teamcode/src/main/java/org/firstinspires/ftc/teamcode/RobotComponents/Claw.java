@@ -103,6 +103,7 @@ public class Claw {
         oldTime = nanoTime();
         return clawPosition; // Return estimated position
     }
+    @Deprecated
     public double extend (boolean extend, boolean retract, boolean override) { // Same as previous, but override switches
         this.extend.setPower(0);
         if (extend){
