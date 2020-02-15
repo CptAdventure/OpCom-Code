@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.BrickGrab;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.BrickOut;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.CrossToBrickEnd;
+import org.firstinspires.ftc.teamcode.AutonomousCommands.Debug;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.DualCommands;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.EndCommand;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.GrabBrickA;
@@ -47,9 +48,10 @@ public class redBBr extends OpMode {
             listOfCommands.add(new BrickGrab(claw, true));
             listOfCommands.add(new TimedMoveCommand(-0.4, 0, 0, brickMoveData.MOVE_ACROSS, drive));
             listOfCommands.add(new DualCommands(new Lift(brickMoveData.ABOVE_BRICK, false, claw), new TimedMoveCommand(0, 0.5, 0, brickMoveData.MOVE_DOWN + 200, drive)));
-            listOfCommands.add(new DualCommands(new TimedMoveCommand(-0.625, 0, 0, brickMoveData.MOVE_HALF, drive), new BrickOut(claw, brickMoveData.PAST_BRICK, false)));
+            listOfCommands.add(new DualCommands(new TimedMoveCommand(-0.625, 0, 0, brickMoveData.MOVE_HALF, drive),
+                    new DualCommands(new BrickOut(claw, brickMoveData.BRICK, false), new Debug("Claw Position", claw.extendVal(), telemetry))));
             listOfCommands.add(new Lift(0, true, claw));
-            listOfCommands.add(new BrickOut(claw, brickMoveData.BRICK, true));
+            listOfCommands.add(new BrickOut(claw, brickMoveData.BRICK * -2, true));
             listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, brickMoveData.MOVE_DOWN, drive));
         }
         listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, brickMoveData.MOVE_LINE, drive));
