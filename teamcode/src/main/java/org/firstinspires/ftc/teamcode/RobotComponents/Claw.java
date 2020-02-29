@@ -10,27 +10,19 @@ import static java.lang.System.nanoTime;
 
 public class Claw {
     private DcMotor vertical;
-    private Servo open;
-    private Servo stone;
-    private Servo rotate;
+    private Servo open, stone, rotate, base, base2;
     private CRServo extend;
-    private boolean oldOpen;
-    private boolean oldRotate;
-    private boolean oldUp;
-    private float on = .5f;
-    private boolean prevDeployed = false;
-    private boolean p = false;
-    private DigitalChannel liftSwitch;
-    private DigitalChannel ccSwitch;
-    private DigitalChannel cfSwitch;
-    private double clawPosition = 0;
-    private double oldTime;
+    private boolean oldOpen, oldRotate, oldUp, oldMini, miniPosition = false, prevDeployed = false, p = false;
+    private float on = .5f, clawPosition = 0, oldTime;
+    private DigitalChannel liftSwitch, ccSwitch, cfSwitch;
 
     private final int MAX_HEIGHT_VALUE = 4750;
 
     public Claw (HardwareMap hardwareMap) {
         vertical = hardwareMap.get(DcMotor.class, "verticalClaw");
         open = hardwareMap.get(Servo.class, "clawOpen");
+        base = hardwareMap.get(Servo.class, "clawMini1");
+        base2 = hardwareMap.get(Servo.class, "clawMini2");
         rotate = hardwareMap.get(Servo.class, "clawRotate");
         stone = hardwareMap.get(Servo.class, "capStone");
         extend = hardwareMap.get(CRServo.class, "clawExtender");
@@ -147,7 +139,7 @@ public class Claw {
         return (cfSwitch.getState()?1:0)+(ccSwitch.getState()?2:0);
     }
     public double rotate(boolean open) { // Rotation. Hopefully self explanitory.
-        p = p ^ (open&&!oldRotate); // Hat is XOR
+        p = p ^ (open&&!oldRotate);
         this.rotate.setPosition(p?1:0);
         oldRotate = open;
         return this.rotate.getPosition();
@@ -156,5 +148,12 @@ public class Claw {
         stone.setPosition(prevDeployed?0.25:0);
         prevDeployed = open || prevDeployed;
         return prevDeployed;
+    }
+    public boolean miniClaw (boolean change) { // ? tutorial: the colon decides the value ( true : false ), boolean in question mark
+        if (change && !oldMini) {  miniPosition = !miniPosition; } // ?s can be stacked with parenthesis
+        base.setPosition(!miniPosition ? 0 : 0.96875);
+        base2.setPosition(!miniPosition ? 0.96875 : 0.09375);
+        oldMini = change;
+        return miniPosition;
     }
 }
