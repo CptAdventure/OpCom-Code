@@ -16,7 +16,7 @@ public class Claw {
     private float on = .5f, clawPosition = 0, oldTime;
     private DigitalChannel liftSwitch, ccSwitch, cfSwitch;
 
-    private final int MAX_HEIGHT_VALUE = 4750;
+    private final int MAX_HEIGHT_VALUE = 6000;
 
     public Claw (HardwareMap hardwareMap) {
         vertical = hardwareMap.get(DcMotor.class, "verticalClaw");

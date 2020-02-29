@@ -36,11 +36,11 @@ public class oldOpModes extends OpMode {
         driveX=gamepad1.left_stick_x==0?0:gamepad1.left_stick_x;
         driveY=gamepad1.left_stick_y==0?0:gamepad1.left_stick_y;
         drive.drive(driveX,driveY, rotation);
-        telemetry.addLine("Gamepad 1: " + gamepad1.id);
+        telemetry.addLine("Gamepad 1 (" + gamepad1.id + ")");
         telemetry.addData("Movement (x,y,r)",driveX+","+driveY+","+ rotation);
         telemetry.addData("Intake Speed", intake.intake((gamepad1.a ^ gamepad1.right_bumper ?1:0)*(gamepad1.b?-1:1)));
         telemetry.addData("Foundation Grabbers", claw.miniClaw(gamepad1.left_bumper));
-        telemetry.addLine("Gamepad 2: " + gamepad2.id);
+        telemetry.addLine("Gamepad 2 (" + gamepad2.id + ")");
         telemetry.addData("Claw Gripper Position", claw.open(gamepad2.right_bumper));
         telemetry.addData("Claw Lift Position (Down?)", Double.toString(claw.lift(gamepad2.right_stick_y*-.9))
                 +'('+claw.down()+')');
@@ -49,7 +49,7 @@ public class oldOpModes extends OpMode {
         telemetry.addData("Claw Rotation (Degrees)", claw.rotate(gamepad2.left_bumper));
         telemetry.addData("Capstone Deployed", claw.capStone(gamepad2.x));
         telemetry.addData("Quick Eject Running", eject.run(gamepad2.start & gamepad2.back));
-        colorInput.setState(!(gamepad2.y && !colorChange));
+        colorInput.setState(gamepad2.y && !colorChange);
         colorChange =  gamepad2.y;
     }
 }
