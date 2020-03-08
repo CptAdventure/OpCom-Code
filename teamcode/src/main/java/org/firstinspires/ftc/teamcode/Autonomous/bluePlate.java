@@ -37,7 +37,7 @@ public class bluePlate extends OpMode {
         listOfCommands.add(new TimedMoveCommand(0, -0.75, 0.365, 3000, drive));
         listOfCommands.add(new DualCommands( new TimedMoveCommand(0, 1, 0, 1000, drive), new grabPlate(claw, false)));
         listOfCommands.add(new TimedMoveCommand(-1, 0, 0, brickMoveData.WALL_TIME, drive));
-        listOfCommands.add(new TimedMoveCommand(0, -1, 0, 1250, drive));
+        listOfCommands.add(new TimedMoveCommand(0, -1, 0, 1000, drive));
         listOfCommands.add(new EndCommand());
         commandToRun = listOfCommands.remove(0);
     }
