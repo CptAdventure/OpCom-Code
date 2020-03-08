@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Blue Base", group="OpMode")
+@Autonomous(name="2020 Blue Base", group="OpMode")
 public class redPlate extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;

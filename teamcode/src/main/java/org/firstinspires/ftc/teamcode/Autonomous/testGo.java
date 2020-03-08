@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Red Brick", group="OpMode")
+@Autonomous(name="2020 Red Brick", group="OpMode")
 public class testGo extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;

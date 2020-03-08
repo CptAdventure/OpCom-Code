@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Claw;
 import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 import org.firstinspires.ftc.teamcode.RobotComponents.Intake;
 
-@TeleOp(name="Concept Design OpMode", group = "LinearOpMode")
+@TeleOp(name="2020 OpMode", group = "LinearOpMode")
 public class oldOpModes extends OpMode {
     private Drive drive;
     private Claw claw;

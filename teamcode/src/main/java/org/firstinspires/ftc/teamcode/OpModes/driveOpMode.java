@@ -3,11 +3,9 @@ package org.firstinspires.ftc.teamcode.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-//import org.firstinspires.ftc.teamcode.RobotComponents.Claw;
 import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
-import org.firstinspires.ftc.teamcode.RobotComponents.Intake;
 
-@TeleOp(name="ONLY Drive OpMode", group = "LinearOpMode")
+@TeleOp(name="2020 Drive OpMode", group = "LinearOpMode")
 public class driveOpMode extends OpMode {
     private Drive drive;
     //private Claw claw;
