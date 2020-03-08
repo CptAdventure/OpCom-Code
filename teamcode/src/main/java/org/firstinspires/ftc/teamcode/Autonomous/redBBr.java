@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.AutonomousCommands.BrickGrab;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.BrickOut;
+import org.firstinspires.ftc.teamcode.AutonomousCommands.BrickOutTime;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.CrossToBrickEnd;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.Debug;
 import org.firstinspires.ftc.teamcode.AutonomousCommands.DualCommands;
@@ -20,13 +21,13 @@ import org.firstinspires.ftc.teamcode.RobotComponents.Drive;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Blue B Brick", group="OpMode")
+@Autonomous(name="Blue Brick", group="OpMode")
 public class redBBr extends OpMode {
     private ArrayList<ICommand> listOfCommands = new ArrayList();
     private ICommand commandToRun;
     private Drive drive;
     private Claw claw;
-    private int i, j;
+    private int i;
 
     @Override
     public void init() {
@@ -35,7 +36,7 @@ public class redBBr extends OpMode {
 
         // Commands
         // listOfCommands.add(new GoDownToBottom(claw));
-        listOfCommands.add(new MoveToWall(drive, hardwareMap, true, 500));
+        listOfCommands.add(new MoveToWall(drive, hardwareMap, true, brickMoveData.DISTANCE));
         listOfCommands.add(new TimedWaitCommand(250));
         listOfCommands.add(new CrossToBrickEnd(drive, hardwareMap, true));
         listOfCommands.add(new TimedWaitCommand(250));
@@ -46,12 +47,12 @@ public class redBBr extends OpMode {
             listOfCommands.add(new TimedWaitCommand(250));
             listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, brickMoveData.MOVE_ACROSS, drive));
             listOfCommands.add(new BrickGrab(claw, true));
-            listOfCommands.add(new TimedMoveCommand(-0.4, 0, 0, brickMoveData.MOVE_ACROSS, drive));
-            listOfCommands.add(new DualCommands(new Lift(brickMoveData.ABOVE_BRICK, false, claw), new TimedMoveCommand(0, 0.5, 0, brickMoveData.MOVE_DOWN + 200, drive)));
+            listOfCommands.add(new TimedMoveCommand(-0.4, 0, 0.0025, brickMoveData.MOVE_ACROSS, drive));
+            listOfCommands.add(new DualCommands(new Lift(brickMoveData.ABOVE_BRICK, false, claw), new TimedMoveCommand(0, 0.5, 0.00125, brickMoveData.MOVE_DOWN + 250, drive)));
             listOfCommands.add(new DualCommands(new TimedMoveCommand(-0.625, 0, 0, brickMoveData.MOVE_HALF, drive),
-                    new DualCommands(new BrickOut(claw, brickMoveData.BRICK, false), new Debug("Claw Position", claw.extendVal(), telemetry))));
+                    new DualCommands(new BrickOut(claw, brickMoveData.BRICK * 3, false), new Debug("Claw Position", claw.extendVal(), telemetry))));
             listOfCommands.add(new Lift(0, true, claw));
-            listOfCommands.add(new BrickOut(claw, brickMoveData.BRICK * -2, true));
+            listOfCommands.add(new BrickOutTime(claw, brickMoveData.BRICK * 1000, true));
             listOfCommands.add(new TimedMoveCommand(0, 0.5, 0, brickMoveData.MOVE_DOWN, drive));
         }
         listOfCommands.add(new TimedMoveCommand(0.5, 0, 0, brickMoveData.MOVE_LINE, drive));

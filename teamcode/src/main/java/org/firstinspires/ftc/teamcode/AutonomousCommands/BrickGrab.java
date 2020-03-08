@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.AutonomousCommands;
 import org.firstinspires.ftc.teamcode.RobotComponents.Claw;
 
 public class BrickGrab implements ICommand {
-    private ICommand wait = new TimedWaitCommand(250);
+    private ICommand wait = new TimedWaitCommand(500);
     private Claw claw;
     private boolean direction;
 

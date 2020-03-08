@@ -2,20 +2,21 @@ package org.firstinspires.ftc.teamcode.AutonomousCommands;
 
 import org.firstinspires.ftc.teamcode.RobotComponents.Claw;
 
-public class BrickOut implements ICommand {
+public class BrickOutTime implements ICommand {
     private Claw claw;
-    private float position;
+    private ICommand timer;
     private boolean in;
 
-    public BrickOut(Claw claw, float position, boolean in) { // Direction: Extend when true, Retract when false
+    public BrickOutTime(Claw claw, int time, boolean in) { // Direction: Extend when true, Retract when false
         this.claw = claw;
-        this.position = position;
+        timer = new TimedWaitCommand(time);
         this.in = in;
     }
 
     @Override
     public boolean Run() {
-        if (in == (claw.extend(!in, in) <= position)) { // if in is false, claw.extend(extend) > position
+        claw.extend(!in, in);
+        if (timer.Run()) { // if in is false, claw.extend(extend) > position
             claw.extend(0);
             return true;
         }

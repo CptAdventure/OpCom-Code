@@ -49,7 +49,7 @@ public class oldOpModes extends OpMode {
         telemetry.addData("Claw Rotation (Degrees)", claw.rotate(gamepad2.left_bumper));
         telemetry.addData("Capstone Deployed", claw.capStone(gamepad2.x));
         telemetry.addData("Quick Eject Running", eject.run(gamepad2.start & gamepad2.back));
-        colorInput.setState(gamepad2.y && !colorChange);
+        colorInput.setState(!(gamepad2.y && !colorChange));
         colorChange =  gamepad2.y;
     }
 }
